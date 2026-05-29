@@ -231,6 +231,19 @@ class CLIParametersConfig(BaseModel):
     gemini: list[str] = Field(default_factory=list)
 
 
+class WhatsAppConfig(BaseModel):
+    """WhatsApp Cloud API connection settings."""
+
+    phone_number_id: str = ""  # from Meta Business dashboard
+    access_token: str = ""  # permanent system user token
+    verify_token: str = ""  # user-chosen random string for webhook verification
+    app_secret: str = ""  # from Meta app dashboard (for signature verification)
+    allowed_users: list[str] = Field(default_factory=list)  # E.164 numbers, e.g. "+15551234567"
+    webhook_path: str = "/whatsapp/webhook"
+    webhook_host: str = "0.0.0.0"  # noqa: S104
+    webhook_port: int = 8743
+
+
 class MatrixConfig(BaseModel):
     """Matrix homeserver connection settings."""
 
@@ -431,13 +444,14 @@ class AgentConfig(BaseModel):
     update_check: bool = True
     group_mention_only: bool = False
     interagent_port: int = 8799
-    transport: str = "telegram"  # "telegram" | "matrix"
+    transport: str = "telegram"  # "telegram" | "matrix" | "whatsapp"
     transports: list[str] = Field(default_factory=list)
     telegram_token: str = ""
     allowed_user_ids: list[int] = Field(default_factory=list)
     allowed_group_ids: list[int] = Field(default_factory=list)
     allowed_channel_ids: list[int] = Field(default_factory=list)
     matrix: MatrixConfig = Field(default_factory=MatrixConfig)
+    whatsapp: WhatsAppConfig = Field(default_factory=WhatsAppConfig)
 
     @field_validator("gemini_api_key", mode="before")
     @classmethod

@@ -16,6 +16,7 @@ from ductor_bot.infra.install import detect_install_mode
 _EXTRAS: dict[str, tuple[str, str]] = {
     "matrix": ("nio", "Matrix messenger support (matrix-nio)"),
     "api": ("nacl", "WebSocket API with E2E encryption (PyNaCl)"),
+    "whatsapp": ("pywa", "WhatsApp Cloud API transport (pywa)"),
 }
 
 

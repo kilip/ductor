@@ -46,3 +46,16 @@ MATRIX_CAPABILITIES = MessengerCapabilities(
     supports_seen_indicator=True,
     max_message_length=40000,
 )
+
+WHATSAPP_CAPABILITIES = MessengerCapabilities(
+    name="whatsapp",
+    supports_inline_buttons=False,
+    supports_reactions=False,
+    supports_message_editing=False,
+    supports_threads=False,
+    supports_typing_indicator=True,
+    supports_file_send=True,
+    supports_streaming_edit=False,
+    supports_seen_indicator=False,
+    max_message_length=4096,
+)

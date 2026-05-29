@@ -63,7 +63,10 @@ api = [
 matrix = [
     "matrix-nio>=0.25.0",
 ]
-dev = ["ductor[test,lint,api,matrix]"]
+whatsapp = [
+    "pywa>=2.0.0",
+]
+dev = ["ductor[test,lint,api,matrix,whatsapp]"]
 
 [project.urls]
 Homepage = "https://ductor.dev"
@@ -199,6 +202,10 @@ ignore_missing_imports = true
 
 [[tool.mypy.overrides]]
 module = ["PIL.*"]
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = ["pywa.*"]
 ignore_missing_imports = true
 
 [[tool.mypy.overrides]]

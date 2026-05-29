@@ -175,6 +175,19 @@ wheels = [
 ]
 
 [[package]]
+name = "anyio"
+version = "4.13.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "idna" },
+    { name = "typing-extensions", marker = "python_full_version < '3.13'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/19/14/2c5dd9f512b66549ae92767a9c7b330ae88e1932ca57876909410251fe13/anyio-4.13.0.tar.gz", hash = "sha256:334b70e641fd2221c1505b3890c69882fe4a2df910cba14d97019b90b24439dc", size = 231622, upload-time = "2026-03-24T12:59:09.671Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/da/42/e921fccf5015463e32a3cf6ee7f980a6ed0f395ceeaa45060b61d86486c2/anyio-4.13.0-py3-none-any.whl", hash = "sha256:08b310f9e24a9594186fd75b4f73f4a4152069e3853f1ed8bfbf58369f4ad708", size = 114353, upload-time = "2026-03-24T12:59:08.246Z" },
+]
+
+[[package]]
 name = "attrs"
 version = "26.1.0"
 source = { registry = "https://pypi.org/simple" }
@@ -385,7 +398,7 @@ wheels = [
 
 [[package]]
 name = "ductor"
-version = "0.16.2"
+version = "0.17.0"
 source = { editable = "." }
 dependencies = [
     { name = "aiogram" },
@@ -413,6 +426,7 @@ dev = [
     { name = "pytest-asyncio" },
     { name = "pytest-cov" },
     { name = "pytest-xdist" },
+    { name = "pywa" },
     { name = "ruff" },
     { name = "time-machine" },
 ]
@@ -431,13 +445,16 @@ test = [
     { name = "pytest-xdist" },
     { name = "time-machine" },
 ]
+whatsapp = [
+    { name = "pywa" },
+]
 
 [package.metadata]
 requires-dist = [
     { name = "aiogram", specifier = ">=3.24.0,<4.0.0" },
     { name = "aiohttp", specifier = ">=3.9.0,<4.0.0" },
     { name = "cronsim", specifier = ">=2.7" },
-    { name = "ductor", extras = ["test", "lint", "api", "matrix"], marker = "extra == 'dev'" },
+    { name = "ductor", extras = ["test", "lint", "api", "matrix", "whatsapp"], marker = "extra == 'dev'" },
     { name = "filetype", specifier = ">=1.2.0" },
     { name = "matrix-nio", marker = "extra == 'matrix'", specifier = ">=0.25.0" },
     { name = "mypy", marker = "extra == 'lint'", specifier = ">=1.19.1" },
@@ -449,6 +466,7 @@ requires-dist = [
     { name = "pytest-asyncio", marker = "extra == 'test'", specifier = ">=1.3.0" },
     { name = "pytest-cov", marker = "extra == 'test'", specifier = ">=7.0.0" },
     { name = "pytest-xdist", marker = "extra == 'test'", specifier = ">=3.8.0" },
+    { name = "pywa", marker = "extra == 'whatsapp'", specifier = ">=2.0.0" },
     { name = "pyyaml", specifier = ">=6.0.3" },
     { name = "questionary", specifier = ">=2.1.1" },
     { name = "rich", specifier = ">=14.3.2" },
@@ -456,7 +474,7 @@ requires-dist = [
     { name = "time-machine", marker = "extra == 'test'", specifier = ">=3.2.0" },
     { name = "tzdata", specifier = ">=2024.1" },
 ]
-provides-extras = ["test", "lint", "api", "matrix", "dev"]
+provides-extras = ["test", "lint", "api", "matrix", "whatsapp", "dev"]
 
 [[package]]
 name = "execnet"
@@ -610,6 +628,34 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/2c/48/71de9ed269fdae9c8057e5a4c0aa7402e8bb16f2c6e90b3aa53327b113f8/hpack-4.1.0.tar.gz", hash = "sha256:ec5eca154f7056aa06f196a557655c5b009b382873ac8d1e66e79e87535f1dca", size = 51276, upload-time = "2025-01-22T21:44:58.347Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/07/c6/80c95b1b2b94682a72cbdbfb85b81ae2daffa4291fbfa1b1464502ede10d/hpack-4.1.0-py3-none-any.whl", hash = "sha256:157ac792668d995c657d93111f46b4535ed114f0c9c8d672271bbec7eae1b496", size = 34357, upload-time = "2025-01-22T21:44:56.92Z" },
+]
+
+[[package]]
+name = "httpcore"
+version = "1.0.9"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "certifi" },
+    { name = "h11" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/06/94/82699a10bca87a5556c9c59b5963f2d039dbd239f25bc2a63907a05a14cb/httpcore-1.0.9.tar.gz", hash = "sha256:6e34463af53fd2ab5d807f399a9b45ea31c3dfa2276f15a2c3f00afff6e176e8", size = 85484, upload-time = "2025-04-24T22:06:22.219Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/7e/f5/f66802a942d491edb555dd61e3a9961140fd64c90bce1eafd741609d334d/httpcore-1.0.9-py3-none-any.whl", hash = "sha256:2d400746a40668fc9dec9810239072b40b4484b640a8c38fd654a024c7a1bf55", size = 78784, upload-time = "2025-04-24T22:06:20.566Z" },
+]
+
+[[package]]
+name = "httpx"
+version = "0.28.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "anyio" },
+    { name = "certifi" },
+    { name = "httpcore" },
+    { name = "idna" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/b1/df/48c586a5fe32a0f01324ee087459e112ebb7224f646c0b5023f5e79e9956/httpx-0.28.1.tar.gz", hash = "sha256:75e98c5f16b0f35b567856f597f06ff2270a374470a5c2392242528e3e3e42fc", size = 141406, upload-time = "2024-12-06T15:37:23.222Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/2a/39/e50c7c3a983047577ee07d2a9e53faf5a69493943ec3f6a384bdc792deb2/httpx-0.28.1-py3-none-any.whl", hash = "sha256:d909fcccc110f8c7faf814ca82a9a4d816bc5a6dbfea25d6591d6985b8ba59ad", size = 73517, upload-time = "2024-12-06T15:37:21.509Z" },
 ]
 
 [[package]]
@@ -1461,6 +1507,18 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/36/0b/cd77011c1bc01b76404f7aba07fca18aca02a19c7626e329b40201217624/python_socks-2.8.1.tar.gz", hash = "sha256:698daa9616d46dddaffe65b87db222f2902177a2d2b2c0b9a9361df607ab3687", size = 38909, upload-time = "2026-02-16T05:24:00.745Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/15/fe/9a58cb6eec633ff6afae150ca53c16f8cc8b65862ccb3d088051efdfceb7/python_socks-2.8.1-py3-none-any.whl", hash = "sha256:28232739c4988064e725cdbcd15be194743dd23f1c910f784163365b9d7be035", size = 55087, upload-time = "2026-02-16T05:23:59.147Z" },
+]
+
+[[package]]
+name = "pywa"
+version = "3.9.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "httpx" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/46/e6/92655218bedbcca644947b83f4cf021b5221f51e5ea1cab723bad01bfaed/pywa-3.9.0.tar.gz", hash = "sha256:c809c66e6d6a83d7c1632f9a11b7cdbd210b0f6d95d200a027ed4975a78741cc", size = 313154, upload-time = "2026-03-11T21:09:01.498Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/48/46/572058064b3648cdd55d9abcb8d2c81e99d8e8e12f03200127bb5cb1fa96/pywa-3.9.0-py3-none-any.whl", hash = "sha256:f9bfce8b6aa502a3f683888fefb2a6d2a0463798095de2b4c9fe8d31332bb1aa", size = 303730, upload-time = "2026-03-11T21:09:00.054Z" },
 ]
 
 [[package]]
