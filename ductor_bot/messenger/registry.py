@@ -95,7 +95,19 @@ def _create_matrix(
     return MatrixBot(config, agent_name=agent_name, bus=bus, lock_pool=lock_pool)
 
 
+def _create_whatsapp(
+    config: AgentConfig,
+    *,
+    agent_name: str,
+    bus: MessageBus | None,
+    lock_pool: LockPool | None,
+) -> BotProtocol:
+    from ductor_bot.messenger.whatsapp.bot import WhatsAppBot
+
+    return WhatsAppBot(config, agent_name=agent_name, bus=bus, lock_pool=lock_pool)
+
 _TRANSPORT_FACTORIES: dict[str, _Factory] = {
     "telegram": _create_telegram,
     "matrix": _create_matrix,
+    "whatsapp": _create_whatsapp,
 }

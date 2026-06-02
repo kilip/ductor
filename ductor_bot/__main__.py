@@ -34,6 +34,7 @@ from ductor_bot.cli_commands.lifecycle import (
     upgrade as _upgrade,
 )
 from ductor_bot.cli_commands.service import cmd_service as _cmd_service
+from ductor_bot.cli_commands.wa import cmd_wa as _cmd_wa
 from ductor_bot.cli_commands.status import (
     print_status as _print_status,
 )
@@ -93,9 +94,17 @@ def _is_configured_matrix(data: dict[str, object]) -> bool:
     return bool(mx.get("homeserver")) and bool(mx.get("user_id"))
 
 
+def _is_configured_whatsapp(data: dict[str, object]) -> bool:
+    wa = data.get("whatsapp", {})
+    if not isinstance(wa, dict):
+        return False
+    return bool(wa.get("enabled"))
+
+
 _IS_CONFIGURED_CHECKS: dict[str, Callable[[dict[str, object]], bool]] = {
     "telegram": _is_configured_telegram,
     "matrix": _is_configured_matrix,
+    "whatsapp": _is_configured_whatsapp,
 }
 
 
@@ -247,9 +256,17 @@ def _validate_matrix_config(config: AgentConfig) -> None:
         sys.exit(1)
 
 
+def _validate_whatsapp_config(config: AgentConfig) -> None:
+    """Validate WhatsApp transport requirements."""
+    if not config.whatsapp.enabled:
+        _console.print("WhatsApp transport is enabled in 'transports' but disabled in 'whatsapp' config.")
+        sys.exit(1)
+
+
 _TRANSPORT_VALIDATORS: dict[str, Callable[[AgentConfig], None]] = {
     "telegram": _validate_telegram_config,
     "matrix": _validate_matrix_config,
+    "whatsapp": _validate_whatsapp_config,
 }
 
 
@@ -320,6 +337,7 @@ _COMMANDS: dict[str, str] = {
     "api": "api",
     "agents": "agents",
     "install": "install",
+    "wa": "wa",
 }
 
 _Action = Callable[[], None]
@@ -356,6 +374,7 @@ def main() -> None:
         "api": lambda: _cmd_api(args),
         "agents": lambda: _cmd_agents(args),
         "install": lambda: _cmd_install(args),
+        "wa": lambda: _cmd_wa(args),
     }
 
     handler = dispatch.get(action) if action else None

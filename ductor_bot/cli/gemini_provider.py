@@ -626,7 +626,7 @@ def _parse_response(stdout: bytes, stderr: bytes, returncode: int | None) -> CLI
         "cached_tokens": stats.get("cached_tokens", stats.get("cached", 0)),
     }
 
-    is_cli_error = bool(parsed.get("is_error")) or parsed.get("status") == "error"
+    is_cli_error = bool(parsed.get("is_error")) or parsed.get("status") == "error" or "error" in parsed
     result = extract_result_text(parsed)
     if not result and is_cli_error:
         result = _extract_error(parsed)

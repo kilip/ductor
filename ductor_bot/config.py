@@ -244,6 +244,12 @@ class MatrixConfig(BaseModel):
     store_path: str = "matrix_store"  # relative to ductor_home
 
 
+class WhatsAppConfig(BaseModel):
+    """WhatsApp Baileys connection settings."""
+    
+    enabled: bool = False
+
+
 class TasksConfig(BaseModel):
     """Settings for background task delegation."""
 
@@ -438,6 +444,7 @@ class AgentConfig(BaseModel):
     allowed_group_ids: list[int] = Field(default_factory=list)
     allowed_channel_ids: list[int] = Field(default_factory=list)
     matrix: MatrixConfig = Field(default_factory=MatrixConfig)
+    whatsapp: WhatsAppConfig = Field(default_factory=WhatsAppConfig)
 
     @field_validator("gemini_api_key", mode="before")
     @classmethod

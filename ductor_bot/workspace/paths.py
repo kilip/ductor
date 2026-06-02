@@ -96,6 +96,10 @@ class DuctorPaths:
         return self.workspace / "memory_system"
 
     @property
+    def wa_auth_dir(self) -> Path:
+        return self.workspace / "wa_auth"
+
+    @property
     def skills_dir(self) -> Path:
         return self.workspace / "skills"
 
